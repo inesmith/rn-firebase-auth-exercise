@@ -25,3 +25,10 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app); // variable that links to the authentication of my firebase app
 
 
+// 1. Create the RegistrationScreen UI
+// 2. Create the registration authentication function in authService.ts
+// 3. Add the functionality to your RegistrationScreen
+// 4. Add efficient navigation between the login and registration screens (stacks & navigation)
+// 5. BONUS: Try and add the user data to the database (if applicable) after registration.
+// 6. BONUS: Add useContext for auth state management.
+// 7. BONUS: Fix the localstorage issue with we get in the terminal.

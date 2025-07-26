@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from './screens/ProfileScreen';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import RegistrationScreen from './screens/RegistrationScreen';
+
 
 // TODO: Navigation Container
 
@@ -34,21 +36,23 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      { isLoggedIn ? (
-        // If user is logged in, show the main app screens
-        <stack.Navigator>
-          <stack.Screen name="Profile" component={ProfileScreen} />
-          {/* Add other screens here */}
-        </stack.Navigator>
-      ) : (
-        // If user is not logged in, show the auth screen
-        <stack.Navigator>
-          <stack.Screen name="Login" component={LoginScreen} />
-        </stack.Navigator>
-      )}
-    </NavigationContainer>
-  );
+  <NavigationContainer>
+    {isLoggedIn ? (
+      // If user is logged in, show the main app screens
+      <stack.Navigator>
+        <stack.Screen name="Profile" component={ProfileScreen} />
+        {/* Add other screens here */}
+      </stack.Navigator>
+    ) : (
+      // If user is not logged in, show the auth screens
+      <stack.Navigator>
+        <stack.Screen name="Login" component={LoginScreen} />
+        <stack.Screen name="Register" component={RegistrationScreen} />
+      </stack.Navigator>
+    )}
+  </NavigationContainer>
+);
+
 }
 
 
