@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"; // authentication functionality
+import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,6 +24,7 @@ const app = initializeApp(firebaseConfig);
 
 // initialise all our services for our firebase app
 export const auth = getAuth(app); // variable that links to the authentication of my firebase app
+export const db = getFirestore(app); // variable that links to the firestore database of my firebase app
 
 
 // 1. Create the RegistrationScreen UI

@@ -3,6 +3,8 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { auth } from "../firebase"
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 
 export const loginUser = (email: string, password: string) => {
@@ -22,21 +24,30 @@ export const loginUser = (email: string, password: string) => {
         });
 }
 
-// TODO: Create Register Functionality &  Register Functionality
-export const registerUser = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("User registered:", user.email);
-            return user;
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("Registration error:", errorMessage);
-            throw error;
-        });
+// Create Register Functionality &  Register Functionality
+export const registerUser = async (email: string, password: string) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    try {
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        email: user.email,
+        createdAt: new Date(),
+      });
+      console.log("User added to Firestore:", user.email);
+    } catch (firestoreError) {
+      console.error("Firestore write error:", firestoreError);
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Registration error:", (error as Error).message);
+    throw error;
+  }
 };
+
 
 
 export const logoutUser = () => {
