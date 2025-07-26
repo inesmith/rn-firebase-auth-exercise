@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, SafeAreaView, TouchableOpacity, Alert, GestureResponderEvent } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { registerUser } from '../services/authService';
 
@@ -29,7 +29,7 @@ const RegistrationScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>Register</Text>
+      <Text style={styles.title}>Register</Text>
 
       <TextInput
         placeholder="Email"
@@ -48,11 +48,13 @@ const RegistrationScreen = () => {
         secureTextEntry
       />
 
-      <Button title="Register" onPress={handleRegister} color="#4CAF50" />
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Login' as never)}>
-        <Text style={styles.loginLink}>Already have an account? Login here</Text>
-      </TouchableOpacity>
+                <Text style={styles.loginLink}>Already have an account? Login here</Text>
+        </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -61,22 +63,36 @@ export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 24,
+    padding: 20,
     justifyContent: 'center',
+    flex: 1,
+    marginTop: -400,
+    marginLeft: 20,
+    marginRight: 20,
   },
-  heading: {
-    fontSize: 28,
-    marginBottom: 24,
+  title: {
+    fontSize: 30,
+    marginBottom: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
   input: {
+    height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: 'black',
+    marginTop: 15,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  button: {
+    backgroundColor: 'black',
     padding: 12,
-    marginBottom: 16,
-    borderRadius: 8,
+    marginTop: 30,
+    borderRadius: 5,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: '600',
   },
   loginLink: {
     marginTop: 20,

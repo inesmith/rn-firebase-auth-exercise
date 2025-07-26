@@ -35,7 +35,7 @@ const LoginScreen = () => {
         />
 
         <TouchableOpacity style={styles.button} onPress={login}>
-          <Text style={styles.buttonText}>Login Button</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         {/* Register Navigation */}
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     flex: 1,
+    marginTop: -400,
   },
   title: {
     fontSize: 30,
