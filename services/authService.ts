@@ -2,7 +2,7 @@
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { auth } from "../firebase"
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 export const loginUser = (email: string, password: string) => {
@@ -23,6 +23,20 @@ export const loginUser = (email: string, password: string) => {
 }
 
 // TODO: Create Register Functionality &  Register Functionality
+export const registerUser = (email: string, password: string) => {
+    return createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log("User registered:", user.email);
+            return user;
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("Registration error:", errorMessage);
+            throw error;
+        });
+};
 
 
 export const logoutUser = () => {
