@@ -20,7 +20,6 @@ const RegistrationScreen = () => {
       Alert.alert("Success", "Account created successfully!");
       // Optionally navigate to Profile or Login
       // navigation.navigate('Profile' as never); // if you want to go to Profile
-      navigation.navigate('Login' as never); // if you want to return to Login
     } catch (error: any) {
       console.log("Registration failed:", error.message);
       alert(error.message);
